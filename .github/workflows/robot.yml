@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [".github/workflows/robot.yml", "scripts/robot.mjs"]
+    paths: [".github/workflows/robot.yml", "scripts/robot.mjs", "scripts/og.py"]
 
 permissions:
   contents: write
@@ -27,21 +27,25 @@ jobs:
       - name: Traer noticias
         run: node scripts/robot.mjs
 
-      - name: Crear imagen de vista previa (si falta)
+      - name: Fotos reales y vista previa (si faltan)
         run: |
-          if [ ! -f og-image.jpg ]; then
-            curl -sSL -o /tmp/foto.jpg "https://commons.wikimedia.org/wiki/Special:FilePath/Capitalio_National_de_Colombia,_Bogot%C3%A1.jpg?width=1600" || exit 0
-            convert /tmp/foto.jpg -resize 1200x630^ -gravity center -extent 1200x630 \
-              \( -size 1200x630 gradient:'rgba(11,26,51,0.15)-rgba(11,26,51,0.95)' \) -composite \
-              -gravity southwest -fill '#ffb21e' -font DejaVu-Sans-Bold -pointsize 74 -annotate +60+170 '¿Ya declararon?' \
-              -fill white -font DejaVu-Sans-Bold -pointsize 34 -annotate +62+110 'Exija la lista de representantes que publicaron su renta' \
-              -fill white -font DejaVu-Sans -pointsize 26 -annotate +62+60 'Derecho de petición ciudadano · Vibras Positivas HM' \
-              -quality 85 og-image.jpg || true
+          mkdir -p media
+          UA="VibrasPositivasHM-robot/1.0 (https://ya-declararon.netlify.app; github.com/haroldco45)"
+          get(){ [ -s "media/$1" ] || curl -fsSL -A "$UA" -o "media/$1" "https://commons.wikimedia.org/wiki/Special:FilePath/$2?width=1600" || rm -f "media/$1"; }
+          get capitolio-1.jpg "Capitalio_National_de_Colombia,_Bogot%C3%A1.jpg"
+          get capitolio-2.jpg "El_Capitolio_Nacional_(Bogot%C3%A1,_Colombia)_1.jpg"
+          get capitolio-3.jpg "Capitolio_Nacional_en_la_lluvia_I.jpg"
+          get capitolio-4.jpg "Capitolio_Nacional_de_Colombia.JPG"
+          get capitolio-5.jpg "Capitolio_Nacional_de_la_Rep%C3%BAblica_de_Colombia.JPG"
+          ls -la media
+          if [ ! -s og-image.jpg ] && [ -s media/capitolio-1.jpg ]; then
+            pip install --quiet pillow
+            python3 scripts/og.py
           fi
 
       - name: Guardar cambios
         run: |
           git config user.name "robot-vibras"
           git config user.email "robot@users.noreply.github.com"
-          git add data/noticias.json og-image.jpg 2>/dev/null || git add data/noticias.json
+          git add data/noticias.json media og-image.jpg 2>/dev/null || git add data/noticias.json media
           git diff --cached --quiet || (git commit -m "Robot: noticias $(TZ=America/Bogota date '+%Y-%m-%d %H:%M')" && git push)
