@@ -1,0 +1,47 @@
+name: Robot de noticias
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/workflows/robot.yml", "scripts/robot.mjs"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: robot
+  cancel-in-progress: false
+
+jobs:
+  noticias:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Traer noticias
+        run: node scripts/robot.mjs
+
+      - name: Crear imagen de vista previa (si falta)
+        run: |
+          if [ ! -f og-image.jpg ]; then
+            curl -sSL -o /tmp/foto.jpg "https://commons.wikimedia.org/wiki/Special:FilePath/Capitalio_National_de_Colombia,_Bogot%C3%A1.jpg?width=1600" || exit 0
+            convert /tmp/foto.jpg -resize 1200x630^ -gravity center -extent 1200x630 \
+              \( -size 1200x630 gradient:'rgba(11,26,51,0.15)-rgba(11,26,51,0.95)' \) -composite \
+              -gravity southwest -fill '#ffb21e' -font DejaVu-Sans-Bold -pointsize 74 -annotate +60+170 '¿Ya declararon?' \
+              -fill white -font DejaVu-Sans-Bold -pointsize 34 -annotate +62+110 'Exija la lista de representantes que publicaron su renta' \
+              -fill white -font DejaVu-Sans -pointsize 26 -annotate +62+60 'Derecho de petición ciudadano · Vibras Positivas HM' \
+              -quality 85 og-image.jpg || true
+          fi
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "robot-vibras"
+          git config user.email "robot@users.noreply.github.com"
+          git add data/noticias.json og-image.jpg 2>/dev/null || git add data/noticias.json
+          git diff --cached --quiet || (git commit -m "Robot: noticias $(TZ=America/Bogota date '+%Y-%m-%d %H:%M')" && git push)

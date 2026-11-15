@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Ya Declararon? — Derecho de petición ciudadano | Vibras Positivas HM</title>
+<meta name="description" content="Exija saber qué representantes a la Cámara han publicado su declaración de renta (Ley 2013 de 2019). Llene sus datos y envíe el derecho de petición a todas las entidades de una sola vez.">
+<meta name="theme-color" content="#0b1a33">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<!-- Vista previa del enlace (WhatsApp, Facebook, X) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vibras Positivas HM">
+<meta property="og:title" content="¿Ya Declararon? Exija la lista de representantes que publicaron su renta">
+<meta property="og:description" content="Más de la mitad de la Cámara no ha reportado su declaración de renta. Envíe su derecho de petición a la Cámara, Función Pública y Procuraduría en un minuto.">
+<meta property="og:url" content="https://ya-declararon.netlify.app/">
+<meta property="og:image" content="https://ya-declararon.netlify.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_CO">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="¿Ya Declararon? Derecho de petición ciudadano">
+<meta name="twitter:description" content="Exija saber qué representantes publicaron su declaración de renta. Envío a todas las entidades de una vez.">
+<meta name="twitter:image" content="https://ya-declararon.netlify.app/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#inicio">
+    <span class="brand-mark">YD</span>
+    <span class="brand-text"><strong>¿Ya Declararon?</strong><small>Vibras Positivas HM</small></span>
+  </a>
+  <nav class="topnav">
+    <a href="#hoy" data-i18n="nav_hoy">Hoy</a>
+    <a href="#peticion" data-i18n="nav_peticion">Mi petición</a>
+    <a href="#ley" data-i18n="nav_ley">La ley</a>
+  </nav>
+  <div class="top-actions">
+    <button class="btn-chip" id="btnRefresh" data-i18n="refresh">Actualizar</button>
+    <button class="btn-chip lang" id="btnLang">EN</button>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Capitalio_National_de_Colombia,_Bogot%C3%A1.jpg?width=1600" alt="Capitolio Nacional de Colombia, sede del Congreso" class="kenburns">
+      <div class="hero-shade"></div>
+    </div>
+    <div class="hero-content">
+      <p class="kicker" data-i18n="kicker">Control ciudadano · Ley 2013 de 2019</p>
+      <h1 data-i18n-html="hero_title">¿Sus representantes <span class="hl">ya declararon</span> su renta?</h1>
+      <p class="lead" data-i18n="hero_lead">Medios nacionales reportan que más de la mitad de la Cámara no ha publicado su declaración de renta. Usted tiene derecho a saber quiénes sí y quiénes no. Llene sus datos y envíe su derecho de petición a todas las entidades de una sola vez.</p>
+      <div class="hero-cta">
+        <a href="#peticion" class="btn-primary" data-i18n="cta_main">Hacer mi derecho de petición</a>
+        <a href="#hoy" class="btn-ghost" data-i18n="cta_news">Ver lo de hoy</a>
+      </div>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track" id="tickerTrack">
+          <span>187 curules en la Cámara</span><span>Solo 23 de 148 representantes con cifras que coinciden</span><span>Respuesta obligatoria en 10 días hábiles</span><span>Ley 2013 de 2019: publicar bienes, rentas y conflictos de interés</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIFRAS -->
+  <section class="stats">
+    <article class="stat reveal">
+      <span class="num" data-count="187">0</span>
+      <p data-i18n="stat1">curules tiene la Cámara de Representantes</p>
+    </article>
+    <article class="stat reveal">
+      <span class="num">+50%</span>
+      <p data-i18n="stat2">de los representantes no ha reportado su declaración de renta, según Infobae Colombia</p>
+    </article>
+    <article class="stat reveal">
+      <span class="num"><span data-count="23">0</span>/148</span>
+      <p data-i18n="stat3">representantes reportan cifras que coinciden entre su formulario de bienes y su declaración de renta, según CAMBIO</p>
+    </article>
+    <article class="stat reveal">
+      <span class="num" data-count="10">0</span>
+      <p data-i18n="stat4">días hábiles tienen las entidades para responder su petición</p>
+    </article>
+  </section>
+
+  <!-- HOY -->
+  <section class="block" id="hoy">
+    <div class="block-head">
+      <div>
+        <p class="kicker dark" data-i18n="hoy_kicker">Se actualiza cada vez que usted entra</p>
+        <h2 data-i18n="hoy_title">Hoy</h2>
+      </div>
+      <p class="stamp" id="hoyStamp">—</p>
+    </div>
+    <div class="today-grid">
+      <article class="today-card deadline reveal">
+        <h3 data-i18n="hoy_deadline_t">Si envía su petición hoy</h3>
+        <p data-i18n="hoy_deadline_p">Le deben responder a más tardar el:</p>
+        <p class="big-date" id="deadlineDate">—</p>
+        <small data-i18n="hoy_deadline_s">10 días hábiles (Ley 1755 de 2015, art. 14), sin contar sábados, domingos ni festivos.</small>
+      </article>
+      <article class="today-card mine reveal">
+        <h3 data-i18n="hoy_mine_t">Mi seguimiento</h3>
+        <p id="mineStatus" data-i18n="hoy_mine_none">Todavía no ha enviado su petición desde este celular.</p>
+        <a href="#peticion" class="btn-small" data-i18n="cta_main">Hacer mi derecho de petición</a>
+      </article>
+    </div>
+    <div class="news-head">
+      <h3 data-i18n="news_title">Noticias del caso</h3>
+      <span class="live" id="liveBadge" data-i18n="live_searching">Buscando en vivo…</span>
+    </div>
+    <div class="news-grid" id="newsGrid"></div>
+    <p class="news-foot" id="newsFoot" data-i18n="news_foot">Un robot revisa las noticias cada 30 minutos y además buscamos en vivo cada vez que usted abre la app.</p>
+  </section>
+
+  <!-- PETICIÓN -->
+  <section class="block alt" id="peticion">
+    <div class="split">
+      <div class="split-media reveal">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/El_Capitolio_Nacional_(Bogot%C3%A1,_Colombia)_1.jpg?width=1200" alt="Fachada del Capitolio Nacional en Bogotá">
+        <div class="split-caption">
+          <strong data-i18n="dest_title">Su petición llega a:</strong>
+          <ul id="destList"></ul>
+        </div>
+      </div>
+      <div class="split-form">
+        <p class="kicker dark" data-i18n="form_kicker">Paso 1 · Sus datos</p>
+        <h2 data-i18n="form_title">Haga su derecho de petición</h2>
+        <p class="muted" data-i18n="form_lead">Sus datos se quedan en su celular. La app solo arma la carta y la abre en su correo, lista para enviar a todas las entidades.</p>
+        <form id="form" autocomplete="on" novalidate>
+          <label><span data-i18n="f_nombre">Nombre completo</span>
+            <input name="nombre" required autocomplete="name"></label>
+          <div class="row2">
+            <label><span data-i18n="f_cedula">Cédula</span>
+              <input name="cedula" required inputmode="numeric"></label>
+            <label><span data-i18n="f_expedida">Expedida en</span>
+              <input name="expedida"></label>
+          </div>
+          <div class="row2">
+            <label><span data-i18n="f_ciudad">Ciudad / municipio</span>
+              <input name="ciudad" required autocomplete="address-level2"></label>
+            <label><span data-i18n="f_depto">Departamento</span>
+              <input name="depto" autocomplete="address-level1"></label>
+          </div>
+          <label><span data-i18n="f_direccion">Dirección (opcional)</span>
+            <input name="direccion" autocomplete="street-address"></label>
+          <div class="row2">
+            <label><span data-i18n="f_correo">Correo para la respuesta</span>
+              <input name="correo" type="email" required autocomplete="email"></label>
+            <label><span data-i18n="f_tel">Teléfono / WhatsApp</span>
+              <input name="tel" inputmode="tel" autocomplete="tel"></label>
+          </div>
+          <label><span data-i18n="f_extra">¿Quiere preguntar por un representante en especial? (opcional)</span>
+            <input name="extra" placeholder="Ej.: los representantes de Antioquia, o un nombre"></label>
+          <p class="err" id="formErr" hidden data-i18n="f_err">Llene nombre, cédula, ciudad y correo.</p>
+          <button type="submit" class="btn-primary wide" data-i18n="f_btn">Ver mi carta</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="letter-wrap" id="letterWrap" hidden>
+      <p class="kicker dark" data-i18n="letter_kicker">Paso 2 · Revise y envíe</p>
+      <p class="muted en-only" data-i18n="letter_en_note">The letter is written in Spanish because Colombian authorities must receive it in Spanish.</p>
+      <div class="letter" id="letter"></div>
+      <div class="send-bar">
+        <button class="btn-primary" id="btnSend" data-i18n="send_all">Enviar a todas las entidades</button>
+        <button class="btn-ghost dark" id="btnGmail" data-i18n="send_gmail">Enviar con Gmail</button>
+        <button class="btn-ghost dark" id="btnCopy" data-i18n="copy">Copiar carta y correos</button>
+        <button class="btn-ghost dark" id="btnPdf" data-i18n="pdf">Guardar en PDF</button>
+      </div>
+      <p class="muted small" data-i18n="send_note">Al tocar "Enviar", se abre su correo con la carta y los correos de todas las entidades ya puestos. Solo toque "Enviar" allá. Guarde la respuesta automática con el número de radicado.</p>
+      <div class="sent-check" id="sentCheck" hidden>
+        <p data-i18n="sent_q">¿Ya la envió desde su correo?</p>
+        <button class="btn-small" id="btnMarkSent" data-i18n="sent_yes">Sí, ya la envié</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARTIR -->
+  <section class="share-band">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Capitolio_Nacional_en_la_lluvia_I.jpg?width=1600" alt="Capitolio Nacional bajo la lluvia" class="share-bg">
+    <div class="share-inner reveal">
+      <h2 data-i18n="share_title">Una petición es una voz. Mil peticiones son un mensaje.</h2>
+      <p data-i18n="share_p">Cada ciudadano debe enviar la suya con su propio nombre. Pásele la app a su familia y a sus grupos.</p>
+      <button class="btn-primary" id="btnShare" data-i18n="share_btn">Compartir por WhatsApp</button>
+    </div>
+  </section>
+
+  <!-- LEY -->
+  <section class="block" id="ley">
+    <p class="kicker dark" data-i18n="ley_kicker">Lo que dice la ley</p>
+    <h2 data-i18n="ley_title">¿Por qué tienen que publicar su renta?</h2>
+    <div class="law-grid">
+      <article class="law reveal"><h3>Ley 2013 de 2019</h3><p data-i18n="law1">Obliga a los congresistas y demás servidores elegidos por voto popular a publicar su declaración de bienes y rentas, su registro de conflictos de interés y su declaración del impuesto sobre la renta, y a actualizarla cada año.</p></article>
+      <article class="law reveal"><h3 data-i18n="law2t">Aplicativo por la Integridad Pública</h3><p data-i18n="law2">Es la herramienta de Función Pública donde se registran esas declaraciones. Cualquier ciudadano puede consultarlas.</p><a href="https://www1.funcionpublica.gov.co/fdci/" target="_blank" rel="noopener" class="link" data-i18n="law2a">Consultar el aplicativo</a></article>
+      <article class="law reveal"><h3>Ley 1755 de 2015</h3><p data-i18n="law3">Las peticiones de documentos e información deben responderse en 10 días hábiles. Si la entidad no es competente, debe trasladarla y avisarle.</p></article>
+      <article class="law reveal"><h3 data-i18n="law4t">¿Y si no responden?</h3><p data-i18n="law4">Pida apoyo a la Procuraduría escribiendo a vigilanciaderechodepeticion@procuraduria.gov.co con copia de su petición y el radicado, o presente una acción de tutela.</p></article>
+    </div>
+    <p class="sources muted small"><span data-i18n="sources">Fuentes:</span> <a href="https://cambiocolombia.com/poder/articulo/2026/11/representantes-ricos-negocios-ganado-tierras-conflicto-interes" target="_blank" rel="noopener">CAMBIO, nov. 2026</a> · <a href="https://www.instagram.com/infobaecolombia/" target="_blank" rel="noopener">Infobae Colombia</a> · <a href="https://www.camara.gov.co/nuevos-canales-de-comunicacion-para-una-atencion-mas-eficiente-a-la-ciudadania/" target="_blank" rel="noopener">Cámara: nuevos canales (sep. 2026)</a> · <a href="https://www.funcionpublica.gov.co/es/ciudadano" target="_blank" rel="noopener">Función Pública: servicio al ciudadano</a></p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p><strong>Vibras Positivas HM</strong> · <span data-i18n="footer">App ciudadana independiente. No pertenece a ninguna entidad del Estado ni partido político.</span></p>
+  <p class="small"><span data-i18n="photos">Fotos:</span> Wikimedia Commons (licencias libres).</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
