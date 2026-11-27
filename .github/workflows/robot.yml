@@ -48,4 +48,4 @@ jobs:
           git config user.name "robot-vibras"
           git config user.email "robot@users.noreply.github.com"
           git add data/noticias.json media og-image.jpg 2>/dev/null || git add data/noticias.json media
-          git diff --cached --quiet || (git commit -m "Robot: noticias $(TZ=America/Bogota date '+%Y-%m-%d %H:%M')" && git push)
+          git diff --cached --quiet || (git commit -m "[skip netlify] Robot: noticias $(TZ=America/Bogota date '+%Y-%m-%d %H:%M')" && git push)
